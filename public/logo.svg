@@ -1,0 +1,7 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="60" cy="60" r="58" fill="#031B4E" stroke="#F0C14B" stroke-width="4"/>
+  <path d="M34 74L53 55L65 67L49 83L34 74Z" fill="#F0C14B"/>
+  <path d="M56 40L86 70" stroke="#F0C14B" stroke-width="5" stroke-linecap="round"/>
+  <path d="M67 51L80 64" stroke="#F0C14B" stroke-width="5" stroke-linecap="round"/>
+  <text x="60" y="108" text-anchor="middle" fill="#F0C14B" font-family="Inter, sans-serif" font-size="12" letter-spacing="0.16em">CSS CRUISE</text>
+</svg>

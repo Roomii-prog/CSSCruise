@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import logo from '../images/logo.png';
 import { instagram } from '../app/content';
 import { ThemeToggle } from './ThemeToggle';
@@ -15,9 +18,32 @@ const navItems = [
 ];
 
 export function SiteHeader() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.classList.toggle('nav-open', menuOpen);
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.classList.remove('nav-open');
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [menuOpen]);
+
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+
   return (
-    <header className="site-header">
-      <Link href="/" className="brand" aria-label="CSS Cruise home">
+    <header className={`site-header ${menuOpen ? 'is-menu-open' : ''}`}>
+      <Link href="/" className="brand" aria-label="CSS Cruise home" onClick={closeMenu}>
         <span className="brand-mark">
           <Image src={logo} alt="CSS Cruise logo" width={54} height={54} priority />
         </span>
@@ -27,16 +53,33 @@ export function SiteHeader() {
         </span>
       </Link>
 
-      <nav className="nav-links" aria-label="Primary navigation">
+      <button
+        type="button"
+        className="menu-toggle"
+        aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-controls="primary-navigation"
+        aria-expanded={menuOpen}
+        onClick={() => setMenuOpen((open) => !open)}
+      >
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+      </button>
+
+      <nav
+        id="primary-navigation"
+        className={`nav-links ${menuOpen ? 'is-open' : ''}`}
+        aria-label="Primary navigation"
+      >
         {navItems.map((item) => (
-          <Link href={item.href} key={item.href}>
+          <Link href={item.href} key={item.href} onClick={closeMenu}>
             {item.label}
           </Link>
         ))}
       </nav>
 
       <div className="header-actions">
-        <a href={instagram.url} target="_blank" rel="noreferrer" className="ghost-link">
+        <a href={instagram.url} target="_blank" rel="noreferrer" className="ghost-link" onClick={closeMenu}>
           {instagram.handle}
         </a>
         <ThemeToggle />

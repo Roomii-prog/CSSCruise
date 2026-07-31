@@ -6,18 +6,14 @@ export function ThemeToggle() {
   const [dark, setDark] = useState(true);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem('css-cruise-theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const nextDark = stored ? stored === 'dark' : prefersDark;
-    setDark(nextDark);
-    document.documentElement.dataset.theme = nextDark ? 'dark' : 'light';
+    window.localStorage.removeItem('css-cruise-theme');
+    document.documentElement.dataset.theme = 'dark';
   }, []);
 
   function toggleTheme() {
     const nextDark = !dark;
     setDark(nextDark);
     document.documentElement.dataset.theme = nextDark ? 'dark' : 'light';
-    window.localStorage.setItem('css-cruise-theme', nextDark ? 'dark' : 'light');
   }
 
   return (

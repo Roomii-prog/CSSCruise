@@ -65,7 +65,7 @@ export default function HomePage() {
 
       <PageIntro
         eyebrow="Quick summary"
-        title="Built for serious preparation without making the homepage heavy."
+        title="Built for serious preparation"
         text="Use the dedicated pages to explore CSS Cruise in detail, or jump straight into the core areas below."
       />
 
